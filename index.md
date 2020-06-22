@@ -1,3 +1,3 @@
 ## [Micoo](https://arxman.com/micoo/)
-A simple screenshots compare solution for visual regression tests.
+A simple screenshots comparison solution for visual regression tests.
 

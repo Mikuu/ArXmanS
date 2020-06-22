@@ -133,6 +133,15 @@ The last thing, if you wish, you can publish your own docker images to your priv
 
 ## Usage
 
+Once you have launched Micoo at your localhost, you could see its dashboard page at `http://localhost:8123` like this
+![empty-board.png](./images/empty-board.png)
+then, we can start our visual regression testing with Micoo.
+
+### Create a Micoo project
+First thing first, to create a new Micoo project, just input a project name and click `Enter`, you will get something like this
+![new-project.png](./images/new-project.png)
+
+
 ## Clients
 
 ## CI integration

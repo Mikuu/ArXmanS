@@ -31,7 +31,9 @@ cd env
 docker-compose up
 ```
 
-this is the simplest approach to launch Micoo. Unless you would like to launch Micoo with your own source code changes, you can always use the images from Docker Hub.
+Then Micoo should be ready at `http://localhost:8123`.
+
+This is the simplest approach to launch Micoo. Unless you would like to launch Micoo with your own source code changes, you can always use the images from Docker Hub.
 
 ### launch with local source code
 
@@ -80,7 +82,9 @@ npm install
 MICOO_DB_USERNAME=micoo-user export MICOO_DB_PASSWORD=micoo-password npm start
 ```
 
-with above commands, it should be successfully launch Micoo from the source code locally.
+Then Micoo should be ready at `http://localhost:8123`.
+
+With above commands, it should be successfully launch Micoo from the source code locally.
 
 ### launch with local docker images
 
@@ -114,7 +118,7 @@ cd postern
 ./build-image.sh
 ```
 
-then, launch Micoo locally with your own docker images:
+launch Micoo locally with your own docker images:
 
 - launch all from local image
 
@@ -123,7 +127,9 @@ cd env
 docker-compose -f docker-compose.local.yaml up
 ```
 
-the last thing, if you wish, you can publish your own docker images to your private or cloud registry, e.g. AWS ECR, to share with teams.
+Then Micoo should be ready at `http://localhost:8123`.
+
+The last thing, if you wish, you can publish your own docker images to your private or cloud registry, e.g. AWS ECR, to share with teams.
 
 ## Usage
 

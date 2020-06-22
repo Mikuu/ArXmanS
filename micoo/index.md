@@ -36,24 +36,28 @@ this is the simplest approach to launch Micoo. Unless you would like to launch M
 ### launch with local source code
 
 - create exchange directory
+
 ```commandline
 mkdir exchange
 npm install
 ```
 
 - containerize micoo-nginx service
+
 ```commandline
 cd env/nginx/containerize
 ./build-image.sh
 ```
 
 - launch environment
+
 ```commandline
 cd env
 docker-compose -f docker-compose.env.yaml up
 ```
 
 - start micoo-dashboard service
+
 ```commandline
 cd dashboard
 npm install
@@ -61,6 +65,7 @@ MICOO_DB_USERNAME=micoo-user export MICOO_DB_PASSWORD=micoo-password npm start
 ```
 
 - start micoo-engine service
+
 ```commandline
 cd engine
 npm install
@@ -68,6 +73,7 @@ MICOO_DB_USERNAME=micoo-user export MICOO_DB_PASSWORD=micoo-password npm start
 ```
 
 - start micoo-postern service
+
 ```commandline
 cd postern
 npm install
@@ -81,24 +87,28 @@ with above commands, it should be successfully launch Micoo from the source code
 once you have debugged your code change successfully, you can containerize them locally:
 
 - containerize micoo-nginx service
+
 ```commandline
 cd env/nginx/containerize
 ./build-image.sh
 ```
 
 - containerize micoo-dashboard service
+
 ```commandline
 cd dashboard
 ./build-image.sh
 ```
 
 - containerize micoo-engine service
+
 ```commandline
 cd engine
 ./build-image.sh
 ```
 
 - containerize micoo-postern service
+
 ```commandline
 cd postern
 ./build-image.sh
@@ -107,6 +117,7 @@ cd postern
 then, launch Micoo locally with your own docker images:
 
 - launch all from local image
+
 ```commandline
 cd env
 docker-compose -f docker-compose.local.yaml up

@@ -309,4 +309,43 @@ More information could be found in the Micoo [repository](https://github.com/Mik
 
 ## CI integration
 
+Play with localhost is not our goal, deploy on a server which is accessible to all your team members is the real direction for Micoo. Once you have done that, you can easily put visual test into automation tests in your CI.
+
+### Test Stats
+
+Before we talk about the CI setup, there is one more thing we need know, the test stats.
+
+Micoo doesn't have any Email notification method to tell anyone on the comparision completeness, and if the result is passed or failed. This is not convenient to CI integration, so Micoo expose two API endpoints to get the test build stats.
+
+#### get build stats
+
+A GET request to `http://[micoo-host]:[port]/stats/build?bid=[bid]`, you will get something like this
+> every time when Micoo client uploads screenshots and trigger new test build, there would be a response which contains the newly created test build's `bid`.
+
+![stats-build.png](./images/stats-build.png)
+
+#### get the latest build stats
+
+Above endpoint `/stats/build` is only useful when it's able to get the `bid`, but if not, e.g. in your CI, it creates build in a Job/Stage/Step, but needs to fetch the stats in another Job/Stage/Step, and there is no way to share parameter between the two Jobs/Stags/Steps, then you could use the endpoint `/stats/build/latest`.
+
+A GET request to `http://[micoo-host]:[port]/stats/build/latest?pid=[pid]`, you will get something like this
+> `pid` could be picked up from the project page's URL.
+
+![stats-build-latest.png](./images/stats-build-latest.png) 
+
+With above two endpoints, it should be enough to create code in any programming language you prefer, to fetch the test stats and result. 
+
+### CI setup
+
+Once we are able to get the test stats and result, it becomes blockless to add visual test into CI.
+
+It's a huge topic about how to set up a functional and stable CI, so I'm not going to talk about that, the only thing I would suggest is how we can add visual test into CI pipeline setup, usually, there are two ways, `synchronized` and `unsynchronized`.
+
+#### `synchronized` visual test setup in CI
+
+
+
+#### `unsynchrozied` visual test setup in CI
+
+
 ## Postern

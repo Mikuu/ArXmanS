@@ -1,4 +1,4 @@
-![dashboard.png](./images/dashboard.png)
+![micoo.gif](./images/micoo.gif)
 
 ## About Micoo
 [Micoo](https://github.com/Mikuu/Micoo) is a pixel based screenshots comparison solution for visual regression test, some characters Micoo provides:

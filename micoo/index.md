@@ -1,5 +1,3 @@
-Micoo
---
 ![dashboard.png](./images/dashboard.png)
 
 ## About Micoo

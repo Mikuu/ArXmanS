@@ -129,6 +129,10 @@ Then Micoo should be ready at `http://localhost:8123`.
 
 The last thing, if you wish, you can publish your own docker images to your private or cloud registry, e.g. AWS ECR, to share with teams.
 
+### Server side deployment
+
+Deploy Micoo on a server is almost the same things as above, the only additional work is to change the `MICOO_FS_HOST_URL` in the docker compose file. You should give the actual server hostname or IP address which can be accessible to your Micoo users.
+
 ## Usage
 
 Once you have launched Micoo at your localhost, you could see its dashboard page at `http://localhost:8123` like this

@@ -345,7 +345,7 @@ It's a huge topic on how to set up a functional and stable CI, so I'm not going 
 
 For all currently visual test solutions, including Micoo, it only detects and reports Mismatch, but Mismatch doesn't equal to Failure, e.g. the mismatch is a new requirement, or a bug fix, which would be rebase as a new baseline. Automation cannot make such decision, it must be judged by human. This brings the thinking-point as an interruption into the CI system, if you manually handle such interruption sequentially in CI, you are running a synchronized visual test pipeline, otherwise, handle it separately, you are running an unsynchronized visual test pipeline.
 
-#### `synchronized` visual test setup in CI
+#### synchronized visual test setup in CI
 
 ![synchronized.png](./images/synchronized.png)
 
@@ -353,7 +353,7 @@ In the synchronized setup, if there is any mismatch found in visual-test stage, 
 
 This setup brings high sensibility of the UI change, and ensure strict UI check before deployment, but somehow, decrease the pipeline's stability.
 
-#### `unsynchrozied` visual test setup in CI
+#### unsynchronized visual test setup in CI
 
 ![unsynchronized.png](./images/unsynchronized.png)
 

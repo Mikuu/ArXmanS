@@ -154,6 +154,7 @@ you can click the newly created project card to get into the project page, so fa
 Micoo is designed to only focus on screenshots comparison, so the screenshots need be prepared by yourself, most of the case, by your UI automation tests. For this demonstration, let's use Puppeteer to simulate a quick Web application UI automation test.
 
 - install Puppeteer
+
 ```commandline
 mkdir -p my-test/screenshots
 cd my-test
@@ -222,14 +223,57 @@ in terminal, you would probably get something like this
 
 ![screenshots-uploaded.png](./images/screenshots-uploaded.png)
 
-in Micoo project page, you would get something like this
-
-![init-build.png](./images/init-build.png)
-
 ### Initialize Baseline
 
+After you first upload, in Micoo project page, you would see something like this
 
+![init-project.png](images/init-project.png)
 
+Every time when you upload a batch of screenshots, Micoo will take them as a `test build`, each of the
+screenshots would be a `test case` with the case name from the screenshot filename.
+
+Once a new test build created, the currently newly uploaded screenshot becomes test case's `latest` image, Micoo then try to find each test case's `baseline` image, to compare with the `latest` image, if there is any pixel mismatch, Micoo generates a `diff` image, all the `baseline`, `latest` and `diff` images will be displayed in Micoo test case page.
+
+For now, since it's the first build we created, there is no baseline image, so test build's result and all test cases' results are marked as `undetermined`. Click build number can navigate to test build page.
+
+![init-build.png](images/init-build.png)
+
+Click each test case name to open test case page, here you can view the uploaded screenshot, if they are correct, click the `Passed` button
+
+![case-passed.png](images/case-passed.png)
+
+You can use `<-` and `->` to navigate between all test cases, once you passed all the test cases, click breadcrumb to go back to test build page, now, all test cases should be marked as `passed`. 
+
+Click the `Rebase` button will tell Micoo to mark current build as a baseline build, all the screenshots in this build will be set as their test cases' baseline images. The same test case's latest image in the subsequent test build will be compared against these baseline images, until you rebase a newer baseline build, or rebase the current baseline build.
+
+> only test build with all passed test cases can be marked as baseline build.
+
+![build-baseline.png](images/build-baseline.png)
+
+You can mark multiple and different test builds as baseline build, only the latest baseline build and its baseline screenshots take effect. If you click the `Rebase` button to rebase the latest baseline build, the previous baseline build, if exists, becomes the real baseline build.
+
+This rebase and debase function give you ability to easily switch baseline among the latest and all previous test builds, this is quite useful, for example, set a baseline to a build which shouldn't be by mistake trigger, or even misunderstanding of the SUT application's design and implementation.
+
+### Subsequent tests
+
+Once you have a baseline build for the project, in your subsequent test, you only need to repetitively take screenshots (for different SUT application version) and upload them to Micoo, all the comparision will automatically happen.
+
+Let's try upload the same screenshots again
+
+```commandline
+node visual-test.js
+```
+Now you will get a new test build and test cases passed
+
+![build-2nd-passed.png](./images/build-2nd-passed.png)
+
+![case-passed.png](./images/case-passed.png)
+
+When there comes any mismatch between the latest screenshot and baseline screenshot, Micoo will find it and show you
+
+![build-failed.png](./images/build-failed.png)
+
+![case-failed.png](./images/case-failed.png)
 
 
 ## Clients

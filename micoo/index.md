@@ -275,8 +275,37 @@ When there comes any mismatch between the latest screenshot and baseline screens
 
 ![case-failed.png](./images/case-failed.png)
 
-
 ## Clients
+
+Micoo is technically a service, to upload the screenshots, trigger new test build for comparision, we need call Micoo's API, these actions have been packaged in the Micoo Client.
+
+### NodeJS
+
+this is the first, and currently, only client we have. Hope I would have time and interest to create more language clients.
+
+#### installation
+
+```commandline
+npm i micooc
+```
+
+#### usage
+
+```javascript
+const { newBuild } = require("micooc");
+
+function test() {
+  const host = "http://localhost:8123/engine";
+  const pid = "PIDd9c19675fc864b34a74b97232fcc338a";
+  const buildVersion = "5fafc0478af24af2da45fa19ddd06c17dd5d0d45";
+  const screenshotDirectory = "./screenshots";
+
+  newBuild(host, pid, buildVersion, screenshotDirectory);
+}
+
+test();
+``` 
+More information could be found in the Micoo [repository](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs)
 
 ## CI integration
 

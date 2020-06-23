@@ -320,18 +320,20 @@ Micoo doesn't have any Email notification method to tell anyone on the comparisi
 #### get build stats
 
 A GET request to `http://[micoo-host]:[port]/stats/build?bid=[bid]`, you will get something like this
-> every time when Micoo client uploads screenshots and trigger new test build, there would be a response which contains the newly created test build's `bid`.
 
 ![stats-build.png](./images/stats-build.png)
+
+> every time when Micoo client uploads screenshots and trigger new test build, there would be a response which contains the newly created test build's `bid`.
 
 #### get the latest build stats
 
 Above endpoint `/stats/build` is only useful when it's able to get the `bid`, but if not, e.g. in your CI, it creates build in a Job/Stage/Step, but needs to fetch the stats in another Job/Stage/Step, and there is no way to share parameter between the two Jobs/Stags/Steps, then you could use the endpoint `/stats/build/latest`.
 
 A GET request to `http://[micoo-host]:[port]/stats/build/latest?pid=[pid]`, you will get something like this
-> `pid` could be picked up from the project page's URL.
 
-![stats-build-latest.png](./images/stats-build-latest.png) 
+![stats-build-latest.png](./images/stats-build-latest.png)
+
+> `pid` could be picked up from the project page's URL. 
 
 With above two endpoints, it should be enough to create code in any programming language you prefer, to fetch the test stats and result. 
 
@@ -339,13 +341,23 @@ With above two endpoints, it should be enough to create code in any programming 
 
 Once we are able to get the test stats and result, it becomes blockless to add visual test into CI.
 
-It's a huge topic about how to set up a functional and stable CI, so I'm not going to talk about that, the only thing I would suggest is how we can add visual test into CI pipeline setup, usually, there are two ways, `synchronized` and `unsynchronized`.
+It's a huge topic on how to set up a functional and stable CI, so I'm not going to talk about that, the only thing I would suggest is how we can add visual test into CI pipeline setup, usually, there are two ways, `synchronized` and `unsynchronized`.
+
+For all currently visual test solutions, including Micoo, it only detects and reports Mismatch, but Mismatch doesn't equal to Failure, e.g. the mismatch is a new requirement, or a bug fix, which would be rebase as a new baseline. Automation cannot make such decision, it must be judged by human. This brings the thinking-point as an interruption into the CI system, if you manually handle such interruption sequentially in CI, you are running a synchronized visual test pipeline, otherwise, handle it separately, you are running an unsynchronized visual test pipeline.
 
 #### `synchronized` visual test setup in CI
 
+![synchronized.png](./images/synchronized.png)
 
+In the synchronized setup, if there is any mismatch found in visual-test stage, it blocks the CI pipeline, and need team member to check the result and take corresponding actions.
+
+This setup brings high sensibility of the UI change, and ensure strict UI check before deployment, but somehow, decrease the pipeline's stability.
 
 #### `unsynchrozied` visual test setup in CI
 
+![unsynchronized.png](./images/unsynchronized.png)
 
-## Postern
+In the unsynchronized setup, once new code change passed the ui-automation-test, it would be deployed automatically, at the meanwhile, it triggers visual-test stage, if there is any mismatch, visual-test stage will fail but not impact deployment, and the mismatch need be checked separately.
+
+This setup also brings high sensibility of the UI change, but loosen the UI check before deployment to provide higher stability.
+

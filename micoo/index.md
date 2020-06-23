@@ -33,7 +33,7 @@ docker-compose up
 
 Then Micoo should be ready at `http://localhost:8123`.
 
-This is the simplest approach to launch Micoo. Unless you would like to launch Micoo with your own source code changes, you can always use the images from Docker Hub.
+This is the simplest approach to launch Micoo. You can always use the images from Docker Hub, unless you would like to launch Micoo with your own source code changes.
 
 ### launch with local source code
 
@@ -140,13 +140,97 @@ Once you have launched Micoo at your localhost, you could see its dashboard page
 then, we can start our visual regression testing with Micoo.
 
 ### Create a Micoo project
-First thing first, to create a new Micoo project, just input a project name and click `Enter`, you will get something like this
+
+First thing first, to create a new Micoo project, just input a project name and click the add button, you will get something like this
 
 ![new-project.png](./images/new-project.png)
 
-you can click the newly created project card to get into the project page, just empty there
+you can click the newly created project card to get into the project page, so far, it's an empty project, no test build.
 
 ![empty-project.png](./images/empty-project.png)
+
+### Prepare SUT application screenshots
+
+Micoo is designed to only focus on screenshots comparison, so the screenshots need be prepared by yourself, most of the case, by your UI automation tests. For this demonstration, let's use Puppeteer to simulate a quick Web application UI automation test.
+
+- install Puppeteer
+```commandline
+mkdir -p my-test/screenshots
+cd my-test
+npm init
+npm i puppeteer
+```
+
+- create test script
+
+generate a test script `ui-test.js` and put in the below code
+
+```javascript
+const puppeteer = require('puppeteer');
+
+(async () => {
+  const browser = await puppeteer.launch({headless: false});
+  const page = await browser.newPage();
+
+  await page.goto('https://www.bing.com');
+  await page.screenshot({path: 'screenshots/test-bing.png'});
+
+  await page.goto('https://www.microsoft.com');
+  await page.screenshot({path: 'screenshots/test-microsoft.png'});
+
+  await browser.close();
+})();
+```
+this test open browser to visit bing and microsoft's home pages, take screenshots and save them in folder `screenshots`.
+> the screenshot filename would be used as test case name in Micoo, MUST in the form of [a-zA-Z0-9-_]+.png.
+
+### Upload screenshots to Micoo and trigger visual comparision
+
+Once we have all test screenshots ready, we can upload them to Micoo and trigger visual testing. To achieve that, we need us Micoo's client library,
+
+```commandline
+npm i micooc
+```
+then, we can create another script `visual-test.js`, and put in below codes
+
+```javascript
+const { newBuild } = require("micooc");
+
+function test() {
+  const host = "http://localhost:8123/engine";
+  const pid = "PIDd9c19675fc864b34a74b97232fcc338a";
+  const buildVersion = "5fafc0478af24af2da45fa19ddd06c17dd5d0d45";
+  const screenshotDirectory = "./screenshots";
+
+  newBuild(host, pid, buildVersion, screenshotDirectory);
+}
+
+test();
+``` 
+there is only one function `newBuild` we need call, and provide it 4 parameters
+* `host` - the Micoo's base URL plus `/engine`,
+* `pid` - your Micoo project's PID, it can be found from the Micoo project page's URL,
+* `buildVersion` - this build version is neither parts of Micoo, nor your UI automation test, it needs to be the version of you SUT application, most of the case, it's the git revision number. `buildVersion` is a useful setup of mappings between your visual tests and the SUT application. Anyway, technically, it's just a string which will be displayed in Micoo's project board, you can use anything which is meaningful to you.
+* `screenshotDirectory` - the directory where contains all screenshots to be uploaded, only `.png` file will be uploaded.
+
+it's time to upload the screenshots and start the visual testing
+
+```commandline
+node visual-test.js
+```
+in terminal, you would probably get something like this
+
+![screenshots-uploaded.png](./images/screenshots-uploaded.png)
+
+in Micoo project page, you would get something like this
+
+![init-build.png](./images/init-build.png)
+
+### Initialize Baseline
+
+
+
+
 
 ## Clients
 

@@ -1,4 +1,4 @@
-![micoo.a.gif](./images/micoo.a.gif)
+![micoo.gif](./images/micoo.gif)
 
 ## About Micoo
 [Micoo](https://github.com/Mikuu/Micoo) is a pixel based screenshots comparison solution for visual regression test, some characters Micoo provides:
@@ -337,7 +337,7 @@ A GET request to `http://[micoo-host]:[port]/stats/build/latest?pid=[pid]`, you 
 
 > `pid` could be picked up from the project page's URL. 
 
-With above two endpoints, it should be enough to create code in any programming language you prefer, to fetch the test stats and result. Micoo client also provides corresponding functions for these, you can check usage details at the client repository.
+With above two endpoints, it should be enough to create code in any programming language you prefer, to fetch the test stats and result. Micoo client also provides corresponding functions for these, you can check usage details at the client [repository](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs).
 
 ### CI setup
 

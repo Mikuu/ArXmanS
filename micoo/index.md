@@ -296,18 +296,18 @@ npm i micooc
 ```javascript
 const { newBuild } = require("micooc");
 
-function test() {
+async function testNewBuild() {
   const host = "http://localhost:8123/engine";
-  const pid = "PIDd9c19675fc864b34a74b97232fcc338a";
+  const pid = "PID6fb00c63d17f4596ba831a299edd21b4";
   const buildVersion = "5fafc0478af24af2da45fa19ddd06c17dd5d0d45";
   const screenshotDirectory = "./screenshots";
 
-  newBuild(host, pid, buildVersion, screenshotDirectory);
+  await newBuild(host, pid, buildVersion, screenshotDirectory);
 }
 
-test();
-``` 
-More information could be found in the Micoo [repository](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs)
+testNewBuild();
+```
+More information could be found in the Micoo NodeJS client [repository](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs)
 
 ## CI integration
 
@@ -337,7 +337,7 @@ A GET request to `http://[micoo-host]:[port]/stats/build/latest?pid=[pid]`, you 
 
 > `pid` could be picked up from the project page's URL. 
 
-With above two endpoints, it should be enough to create code in any programming language you prefer, to fetch the test stats and result. 
+With above two endpoints, it should be enough to create code in any programming language you prefer, to fetch the test stats and result. Micoo client also provides corresponding functions for these, you can check usage details at the client repository.
 
 ### CI setup
 

@@ -1,9 +1,9 @@
 # PACT JVM Example
 
-These codes provide an example about how to do Contract Test with PACT JVM Junit, 
+This [repository](https://github.com/Mikuu/Pact-JVM-Example) codes provide an example about how to do Contract Test with PACT JVM Junit, 
 which uses Junit in Consumer side and Gradle task in Provider side, it will cover:
 
-- Microservices examples created with Spring Boot.
+- Microservice examples created with Spring Boot.
 - Example of one Provider to two Consumers.
 - Write Consumer tests in different ways including using Basic Junit, Junit Rule and DSL method.
 - Example of Provider State.

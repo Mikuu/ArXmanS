@@ -61,7 +61,7 @@ docker-compose -f docker-compose.env.yaml up
 ```commandline
 cd dashboard
 npm install
-MICOO_DB_USERNAME=micoo-user export MICOO_DB_PASSWORD=micoo-password npm start
+MICOO_DB_USERNAME=micoo-user MICOO_DB_PASSWORD=micoo-password npm start
 ```
 
 - start micoo-engine service
@@ -69,18 +69,10 @@ MICOO_DB_USERNAME=micoo-user export MICOO_DB_PASSWORD=micoo-password npm start
 ```commandline
 cd engine
 npm install
-MICOO_DB_USERNAME=micoo-user export MICOO_DB_PASSWORD=micoo-password npm start
+MICOO_DB_USERNAME=micoo-user MICOO_DB_PASSWORD=micoo-password npm start
 ```
 
-- start micoo-postern service
-
-```commandline
-cd postern
-npm install
-MICOO_DB_USERNAME=micoo-user export MICOO_DB_PASSWORD=micoo-password npm start
-```
-
-Then Micoo should be ready at `http://localhost:8123`.
+Then Micoo should be ready at `http://localhost:3001`.
 
 With above commands, it should be successfully launch Micoo from the source code locally.
 
@@ -106,13 +98,6 @@ cd dashboard
 
 ```commandline
 cd engine
-./build-image.sh
-```
-
-- containerize micoo-postern service
-
-```commandline
-cd postern
 ./build-image.sh
 ```
 

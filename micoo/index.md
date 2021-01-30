@@ -264,11 +264,13 @@ When there comes any mismatch between the latest screenshot and baseline screens
 
 ## Clients
 
-Micoo is technically a service, to upload the screenshots, trigger new test build for comparision, we need call Micoo's API, these actions have been packaged in the Micoo Client.
+Micoo is technically a service, to upload the screenshots, trigger new test build for comparision, we need call Micoo's API, 
+these actions have been packaged in the Micoo Clients. Currently, Micoo provides clients implementation in:
+- [NodeJS](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs)
+- [Python](https://github.com/Mikuu/Micoo/tree/master/clients/python)
+- [Java](https://github.com/Mikuu/Micoo/tree/master/clients/java)
 
-### NodeJS
-
-this is the first, and currently, only client we have. Hope I would have time and interest to create more language clients.
+let's take NodeJS client for example:
 
 #### installation
 

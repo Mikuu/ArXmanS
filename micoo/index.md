@@ -26,6 +26,7 @@ According to different purposes, there are 3 ways to launch Micoo as described b
 > all the below steps require the project [repository](https://github.com/Mikuu/Micoo) be cloned to your local, and all the commands are executed from the project's root path.
 
 > before going to each launching steps, please first check the [initialization section](###initialize-micoo-service), otherwise you may lost your passcode.
+
 ### launch with Docker images from Docker Hub
 
 ```commandline

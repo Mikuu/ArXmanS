@@ -1,12 +1,15 @@
+Micoo
+--
+
 ![micoo.gif](./images/micoo.gif)
 
-## About Micoo
-[Micoo](https://github.com/Mikuu/Micoo) is a pixel based screenshots comparison solution for visual regression test, some characters Micoo provides:
+Micoo (repository is [here](https://github.com/Mikuu/Micoo)) is a pixel based screenshots comparison solution for visual regression test, some characters Micoo provides:
 
 * a web application, for inspecting test results, making visual mismatch decision and maintain baseline build,
 * an engine service, for comparing the latest screenshots against baseline screenshots, based on pixel difference,
 * a methodology, about how to do visual regression test with service,
 * quick local setup and server side deployment with Docker Compose,
+* basic authentication with a passcode and API key,
 
 Micoo does `NOT`:
 * take screenshots from your SUT application,
@@ -22,6 +25,7 @@ According to different purposes, there are 3 ways to launch Micoo as described b
 
 > all the below steps require the project [repository](https://github.com/Mikuu/Micoo) be cloned to your local, and all the commands are executed from the project's root path.
 
+> before going to each launching steps, please first check the [initialization section](###initialize-micoo-service), otherwise you may lost your passcode.
 ### launch with Docker images from Docker Hub
 
 ```commandline
@@ -74,7 +78,7 @@ npm install
 
 Then Micoo should be ready at `http://localhost:3001`.
 
-With above commands, it should be successfully launch Micoo from the source code locally.
+With above commands, it should successfully launch Micoo from the source code locally.
 
 ### launch with local docker images
 
@@ -120,7 +124,22 @@ Deploy Micoo on a server is almost the same things as above, the only additional
 
 ## Usage
 
-Once you have launched Micoo at your localhost, you could see its dashboard page at `http://localhost:8123` like this
+Micoo service will be initialized firstly when you launch it.
+
+### Initialize Micoo service
+
+The first time when you launched Micoo and visit `http://localhost:8123`, you will get the initialization page like below. In this page, Micoo 
+will give you the passcode for current service, BE CAREFUL, **the passcode shown in initialization page can never been retrieved, you must save it
+somewhere properly, if you forget your passcode, there is no way to let you log in to Micoo again except destroying current Micoo service and relaunching 
+a new one**.
+
+![initialization](./images/init.png)
+
+Click the `Start` button or refresh the current page (never do this before you have recorded you passcode) will lead you to the login page as below.
+
+![login](./images/login.png)
+
+Log in with the passcode, then you could see its dashboard page like this
 
 ![empty-board.png](./images/empty-board.png)
 
@@ -186,17 +205,19 @@ const { newBuild } = require("micooc");
 
 function test() {
   const host = "http://localhost:8123/engine";
+  const apiKey = "AK005fca5cbc9779755f";
   const pid = "PIDd9c19675fc864b34a74b97232fcc338a";
   const buildVersion = "5fafc0478af24af2da45fa19ddd06c17dd5d0d45";
   const screenshotDirectory = "./screenshots";
 
-  newBuild(host, pid, buildVersion, screenshotDirectory);
+  newBuild(host, apiKey, pid, buildVersion, screenshotDirectory);
 }
 
 test();
 ``` 
 there is only one function `newBuild` we need call, and provide it 4 parameters
 * `host` - the Micoo's base URL plus `/engine`,
+* `apiKey` - the project's API Key, it could be found from the Micoo UI,
 * `pid` - your Micoo project's PID, it can be found from the Micoo project page's URL,
 * `buildVersion` - this build version is neither parts of Micoo, nor your UI automation test, it needs to be the version of you SUT application, most of the case, it's the git revision number. `buildVersion` is a useful setup of mappings between your visual tests and the SUT application. Anyway, technically, it's just a string which will be displayed in Micoo's project board, you can use anything which is meaningful to you.
 * `screenshotDirectory` - the directory where contains all screenshots to be uploaded, only `.png` file will be uploaded.
@@ -285,16 +306,18 @@ const { newBuild } = require("micooc");
 
 async function testNewBuild() {
   const host = "http://localhost:8123/engine";
+  const apiKey = "AK005fca5cbc9779755f";
   const pid = "PID6fb00c63d17f4596ba831a299edd21b4";
   const buildVersion = "5fafc0478af24af2da45fa19ddd06c17dd5d0d45";
   const screenshotDirectory = "./screenshots";
 
-  await newBuild(host, pid, buildVersion, screenshotDirectory);
+  await newBuild(host, apiKey, pid, buildVersion, screenshotDirectory);
 }
 
 testNewBuild();
 ```
-More information could be found in the Micoo NodeJS client [repository](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs)
+More information could be found in the Micoo NodeJS client [repository](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs), for consuming 
+backend service without client bindings, please refer [here](https://github.com/Mikuu/Micoo).
 
 ## CI integration
 

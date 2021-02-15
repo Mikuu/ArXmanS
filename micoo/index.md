@@ -284,6 +284,28 @@ When there comes any mismatch between the latest screenshot and baseline screens
 
 ![case-failed.png](./images/case-failed.png)
 
+### Change project card background image
+
+Any time when you create a new project in the dashboard page, the project card has a default background image, you can 
+change it to your own favorite one. In the project page, click the `image` icon will trigger a file uploader modal, use 
+it to upload your own project card background image.
+
+![change-project-card-bg.png](./images/change-project-card-bg.png)
+
+after uploading successfully, get back to dashboard page, you can see the project card background image is changed now.
+
+![project-card-bg.png](./images/project-card-bg.png)
+
+#### prepare project card background image
+
+To reduce the image size and match the compatibility, the project card background image must be a `.webp` file with radio 
+at 348x255. You can create such an image easily with [ImageMagick](https://imagemagick.org/script/download.php), once you 
+installed ImageMagick, use below command to create a webp image from a normal png file:
+
+```commandline
+convert original-background-image.png -resize 348x225 required-background-image.webp
+```
+
 ## Clients
 
 Micoo is technically a service, to upload the screenshots, trigger new test build for comparision, we need call Micoo's API, 

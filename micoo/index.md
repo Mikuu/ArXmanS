@@ -204,14 +204,14 @@ then, we can create another script `visual-test.js`, and put in below codes
 ```javascript
 const { newBuild } = require("micooc");
 
-function test() {
+async function test() {
   const host = "http://localhost:8123/engine";
   const apiKey = "AK005fca5cbc9779755f";
   const pid = "PIDd9c19675fc864b34a74b97232fcc338a";
   const buildVersion = "5fafc0478af24af2da45fa19ddd06c17dd5d0d45";
   const screenshotDirectory = "./screenshots";
 
-  newBuild(host, apiKey, pid, buildVersion, screenshotDirectory);
+  await newBuild(host, apiKey, pid, buildVersion, screenshotDirectory);
 }
 
 test();
@@ -311,6 +311,7 @@ convert original-background-image.png -resize 348x225 required-background-image.
 Micoo is technically a service, to upload the screenshots, trigger new test build for comparision, we need call Micoo's API, 
 these actions have been packaged in the Micoo Clients. Currently, Micoo provides clients implementation in:
 - [NodeJS](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs)
+- [Cypress Plugin](https://github.com/Mikuu/Micoo/tree/master/clients/micoocypress)
 - [Python](https://github.com/Mikuu/Micoo/tree/master/clients/python)
 - [Java](https://github.com/Mikuu/Micoo/tree/master/clients/java)
 

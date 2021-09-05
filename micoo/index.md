@@ -1,7 +1,7 @@
 Micoo
 --
 
-![micoo.gif](./images/micoo.gif)
+![micoo.gif](./images/cover.gif)
 
 Micoo (repository is [here](https://github.com/Mikuu/Micoo)) is a pixel based screenshots comparison solution for visual regression test, some characters Micoo provides:
 
@@ -218,8 +218,8 @@ test();
 ``` 
 there is only one function `newBuild` we need call, and provide it 4 parameters
 * `host` - the Micoo's base URL plus `/engine`,
-* `apiKey` - the project's API Key, it could be found from the Micoo UI,
-* `pid` - your Micoo project's PID, it can be found from the Micoo project page's URL,
+* `apiKey` - the project's API Key, it could be found in the configuration on the Project page,
+* `pid` - your Micoo project's PID, it can be found in the configuration on the Project page,
 * `buildVersion` - this build version is neither parts of Micoo, nor your UI automation test, it needs to be the version of you SUT application, most of the case, it's the git revision number. `buildVersion` is a useful setup of mappings between your visual tests and the SUT application. Anyway, technically, it's just a string which will be displayed in Micoo's project board, you can use anything which is meaningful to you.
 * `screenshotDirectory` - the directory where contains all screenshots to be uploaded, only `.png` file will be uploaded.
 
@@ -253,7 +253,7 @@ Click each test case name to open test case page, here you can view the uploaded
 
 You can use `<-` and `->` to navigate between all test cases, once you passed all the test cases, click breadcrumb to go back to test build page, now, all test cases should be marked as `passed`. 
 
-Click the `Rebase` button will tell Micoo to mark current build as a baseline build, all the screenshots in this build will be set as their test cases' baseline images. The same test case's latest image in the subsequent test build will be compared against these baseline images, until you rebase a newer baseline build, or rebase the current baseline build.
+Click the `Rebase` button will tell Micoo to mark current build as a baseline build, all the screenshots in this build will be set as their test cases' baseline images. The same test case's latest image in the subsequent test build will be compared against these baseline images, until you rebase a newer baseline build, or debase the current baseline build.
 
 > only test build with all passed test cases can be marked as baseline build.
 
@@ -284,11 +284,45 @@ When there comes any mismatch between the latest screenshot and baseline screens
 
 ![case-failed.png](./images/case-failed.png)
 
+### Check the difference
+
+In the test case page, the baseline and latest screenshots will be shown together with the difference image, sometimes, it is difficult to clearly see the every details on the shrunken screenshots, so Micoo provides some convenient ways on that:
+
+#### Open in a bigger view
+click on baseline or latest screenshot, it will open a modal to display the screenshots in their original size or in your fullscreen size.
+
+#### Zooming on the screenshot
+put mouse on the baseline or latest screenshot, zoom-in, zoom-out and dragging are support to help check the screenshot details.
+
+#### Compare with slider
+click the image compare button on the tool panel, it will open an image compare modal, in the compare modal you can move the slider to find the difference between baseline and latest screenshots more easily.
+
+### Ignoring
+
+Dynamic content, e.g. video, gif, and other non-consistent data, e.g. datetime, unique ID, verification code, are usually blockers to visual regression testing, their display are always different from each time the tests taking screenshots, thus makes it difficult to do pixel based image comparing. To help resolve this kind of problems, Micoo provides a solution called **Ignoring Rectangles**, that user can draw any size and any mount of rectangles on the baseline screenshot, any mismatch between baseline and latest screenshots which happens on those rectangles will be ignored by Micoo's automatic comparing, this could help to make the visual testing running much more stable against any dynamic and non-consistent elements on the screenshots.
+
+#### Create Ignoring Rectangles
+in the test case page, click the Ignoring Rectangles button on the tool panel, it will show the Edit Ignoring modal, the modal displays the baseline screenshot, on the image, draw rectangles by dragging and releasing the cursor, then click the Save button and close the modal.
+
+after the page refreshed, the diff image will be added some rectangles in light green, which reflects the ignoring area given to this test case, also once a test case has ignoring rectangles, it will display a star mark preceding the Ignoring Rectangles button as a notice. 
+
+#### Remove Ignoring Rectangles
+in the Ignoring modal, click on any exists rectangles and click the Remove button will delete those selected Ignoring Rectangles.
+
+#### Some special cases
+please pay attention to below special cases with working with Ignoring Rectangles:
+
+##### Rebase & Debase
+since Ignoring Rectangles are applied on baseline screenshots, while Rebase and Debase operations change the current project's baseline, so Rebase and Debase operations will always delete all Ignoring Rectangles of all test cases in that project.
+
+##### Soft Passed
+when Micoo compare a test case's latest screenshot with its baseline screenshot, if there are mismatches only happened within ignoring rectangles, the latest screenshot will be judged as **Soft Passed**, soft passed test case will be given the result "passed" in blue color to distinguish from other truly passed test cases which "passed" are in green color.
+
+soft passed test case can be further judged as truly passed by clicking the Passed button manually. The most important notification is that a test build with soft passed test cases can not be set as baseline, if you need to rebase a build as new baseline, you must give truly passed result to all soft passed test cases first.
+
 ### Change project card background image
 
-Any time when you create a new project in the dashboard page, the project card has a default background image, you can 
-change it to your own favorite one. In the project page, click the `image` icon will trigger a file uploader modal, use 
-it to upload your own project card background image.
+Any time when you create a new project in the dashboard page, the project card has a default background image, you can change it to your own favorite one. In the project page, click the `image` icon will trigger a file uploader modal, use it to upload your own project card background image.
 
 ![change-project-card-bg.png](./images/change-project-card-bg.png)
 
@@ -371,7 +405,7 @@ A GET request to `http://[micoo-host]:[port]/stats/build/latest?pid=[pid]`, you 
 
 > `pid` could be picked up from the project page's URL. 
 
-With above two endpoints, it should be enough to create code in any programming language you prefer, to fetch the test stats and result. Micoo client also provides corresponding functions for these, you can check usage details at the client [repository](https://github.com/Mikuu/Micoo/tree/master/clients/nodejs).
+With above two endpoints, it should be enough to create code in any programming language you prefer, to fetch the test stats and result. Micoo client also provides corresponding functions for these, you can check usage details at the client [repository](https://github.com/Mikuu/Micoo/tree/master/clients).
 
 ### CI setup
 

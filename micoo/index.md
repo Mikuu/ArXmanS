@@ -288,6 +288,10 @@ When there comes any mismatch between the latest screenshot and baseline screens
 
 In the test case page, the baseline and latest screenshots will be shown together with the difference image, sometimes, it is difficult to clearly see the every details on the shrunken screenshots, so Micoo provides some convenient ways on that:
 
+
+https://user-images.githubusercontent.com/11648253/132117975-3c0da295-eb3c-4615-9136-9389e6dae862.mp4
+
+
 #### Open in a bigger view
 click on baseline or latest screenshot, it will open a modal to display the screenshots in their original size or in your fullscreen size.
 
@@ -300,6 +304,10 @@ click the image compare button on the tool panel, it will open an image compare 
 ### Ignoring
 
 Dynamic content, e.g. video, gif, and other non-consistent data, e.g. datetime, unique ID, verification code, are usually blockers to visual regression testing, their display are always different from each time the tests taking screenshots, thus makes it difficult to do pixel based image comparing. To help resolve this kind of problems, Micoo provides a solution called **Ignoring Rectangles**, that user can draw any size and any mount of rectangles on the baseline screenshot, any mismatch between baseline and latest screenshots which happens on those rectangles will be ignored by Micoo's automatic comparing, this could help to make the visual testing running much more stable against any dynamic and non-consistent elements on the screenshots.
+
+
+https://user-images.githubusercontent.com/11648253/132118224-bd25cea6-62cd-46bf-a34a-9d01ab0bceca.mp4
+
 
 #### Create Ignoring Rectangles
 in the test case page, click the Ignoring Rectangles button on the tool panel, it will show the Edit Ignoring modal, the modal displays the baseline screenshot, on the image, draw rectangles by dragging and releasing the cursor, then click the Save button and close the modal.

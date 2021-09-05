@@ -289,7 +289,7 @@ When there comes any mismatch between the latest screenshot and baseline screens
 In the test case page, the baseline and latest screenshots will be shown together with the difference image, sometimes, it is difficult to clearly see the every details on the shrunken screenshots, so Micoo provides some convenient ways on that:
 
 
-https://user-images.githubusercontent.com/11648253/132119048-e3cebd05-850a-484f-808c-e86cfcd3d088.mp4
+https://user-images.githubusercontent.com/11648253/132119463-b1fee522-7b79-4db4-87b8-646d55a384b1.mp4
 
 
 #### Open in a bigger view

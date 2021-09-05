@@ -303,10 +303,10 @@ click the image compare button on the tool panel, it will open an image compare 
 
 ### Ignoring
 
-Dynamic content, e.g. video, gif, and other non-consistent data, e.g. datetime, unique ID, verification code, are usually blockers to visual regression testing, their display are always different from each time the tests taking screenshots, thus makes it difficult to do pixel based image comparing. To help resolve this kind of problems, Micoo provides a solution called **Ignoring Rectangles**, that user can draw any size and any mount of rectangles on the baseline screenshot, any mismatch between baseline and latest screenshots which happens on those rectangles will be ignored by Micoo's automatic comparing, this could help to make the visual testing running much more stable against any dynamic and non-consistent elements on the screenshots.
+Dynamic content, e.g. video, gif, and other inconsistent data, e.g. datetime, unique ID, verification code, are usually blockers to visual regression testing, their display are always different from each time the tests taking screenshots, thus makes it difficult to do pixel based image comparing. To help resolve this kind of problems, Micoo provides a solution called **Ignoring Rectangles**, that user can draw any size and any mount of rectangles on the baseline screenshot, any mismatch between baseline and latest screenshots which happens on those rectangles will be ignored by Micoo's automatic comparing, this could help to make the visual testing running much more stable against any dynamic and inconsistent elements on the screenshots.
 
 
-https://user-images.githubusercontent.com/11648253/132119063-7ccfa34b-4157-4ff5-9eca-8f74a07fc567.mp4
+https://user-images.githubusercontent.com/11648253/132122072-aff06e82-7f60-4f66-a5e7-8060299c92f6.mp4
 
 
 #### Create Ignoring Rectangles

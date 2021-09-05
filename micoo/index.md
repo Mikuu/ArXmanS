@@ -320,7 +320,7 @@ please pay attention to below special cases with working with Ignoring Rectangle
 since Ignoring Rectangles are applied on baseline screenshots, while Rebase and Debase operations change the current project's baseline, so Rebase and Debase operations will always delete all Ignoring Rectangles of all test cases in that project.
 
 ##### Soft Passed
-when Micoo compare a test case's latest screenshot with its baseline screenshot, if there are mismatches only happened within ignoring rectangles, the latest screenshot will be judged as **Soft Passed**, soft passed test case will be given the result "passed" in blue color to distinguish from other truly passed test cases which "passed" are in green color.
+when Micoo compare a test case's latest screenshot with its baseline screenshot, if there are mismatches only happened within ignoring rectangles, the latest screenshot will be judged as **Soft Passed**, soft passed test case will be given the result "passed" in blue color to distinguish from other truly passed test cases which "passed" are in green color, and also in the test case page, an orange border will be given to the check mark of a soft passed test case. 
 
 soft passed test case can be further judged as truly passed by clicking the Passed button manually. The most important notification is that a test build with soft passed test cases can not be set as baseline, if you need to rebase a build as new baseline, you must give truly passed result to all soft passed test cases first.
 

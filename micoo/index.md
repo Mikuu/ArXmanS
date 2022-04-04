@@ -317,7 +317,7 @@ in the Ignoring modal, click on any exists rectangles and click the Remove butto
 please pay attention to below special cases with working with Ignoring Rectangles:
 
 ##### Rebase & Debase
-since Ignoring Rectangles are applied on baseline screenshots, while Rebase and Debase operations change the current project's baseline, so Rebase and Debase operations will always delete all Ignoring Rectangles of all test cases in that project.
+since Ignoring Rectangles are applied on baseline screenshots, while Rebase and Debase operations change the current project's baseline, so by default Rebase and Debase operations will delete all Ignoring Rectangles of all test cases in that project. If you need to keep some Ignoring Rectangles regardless the baseline changes, you can check `Preserve Ignoring on Rebase` option on each project's configuration, this will disable cleaning Ignoring Rectangles on Rebase and Debase. 
 
 ##### Soft Passed
 when Micoo compare a test case's latest screenshot with its baseline screenshot, if there are mismatches only happened within ignoring rectangles, the latest screenshot will be judged as **Soft Passed**, soft passed test case will be given the result "passed" in blue color to distinguish from other truly passed test cases which "passed" are in green color, and also in the test case page, an orange border will be given to the check mark of a soft passed test case. 
